@@ -21,14 +21,14 @@ app.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
 
-    if (!message) {
+    if (!message || typeof message !== "string") {
       return res.status(400).json({
         error: "Le message est obligatoire.",
       });
     }
 
     const response = await client.responses.create({
-      model: "gpt-5.5",
+      model: "gpt-5.6",
       instructions:
         "Tu es l'assistant biblique de Bible Master. Réponds en français de manière claire, respectueuse et utile. Aide les utilisateurs à comprendre la Bible, préparer des enseignements et étudier les textes bibliques. Ne présente pas tes réponses comme remplaçant un pasteur, un enseignant ou un conseiller qualifié.",
       input: message,
